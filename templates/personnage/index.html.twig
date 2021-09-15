@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnage index{% endblock %}
+
+{% block body %}
+    <h1>Personnage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personnage in personnages %}
+            <tr>
+                <td>{{ personnage.id }}</td>
+                <td>{{ personnage.name }}</td>
+                <td>
+                    <img src=" {{ asset(personnage.image) }}" style=" height: 100px; object-fit: contain;" alt="">
+                </td>
+                <td>
+                    <a href="{{ path('personnage_show', {'id': personnage.id}) }}">show</a>
+                    <a href="{{ path('personnage_edit', {'id': personnage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('personnage_new') }}">Create new</a>
+{% endblock %}
